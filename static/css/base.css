@@ -1,0 +1,272 @@
+
+body {
+    background-color: #eee;
+}
+
+/*.row div {*/
+/*    border: solid 0 red;*/
+/*}*/
+
+@media (min-width: 1300px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+
+/*全文的超链接样式*/
+a:link, a:visited {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+a:hover, a:active {
+    text-decoration: none;
+    color: #e56244;
+}
+
+.header {
+    border-top: solid 0 black;
+}
+
+/*为全站div添加圆角*/
+div {
+    border-radius: 5px;
+}
+
+
+/*菜单栏样式*/
+.menu {
+    border-top: solid 0 orangered;
+    background-color: #563d7c;
+}
+
+.menu .menu-bar a:link {
+    color: white;
+}
+
+.menu .menu-bar a:hover {
+    color: orangered;
+}
+
+.article-list {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 15px 0px;
+}
+
+/*显示文章的样式*/
+.article-list .thumb {
+    margin: 0px;
+    padding: 2px 10px 0 0;
+}
+
+.article-list .thumb img {
+    width: 210px;
+    height: 125px;
+}
+
+.article-list .detail {
+    padding: 0px 10px;
+}
+
+.article-list .detail .title {
+    font-size: 22px;
+    color: #e56244;
+    margin-bottom: 10px;
+}
+
+.article-list .detail .info {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.article-list .detail .intro {
+    font-size: 16px;
+    /*<!--英文单词是否完整换行-->*/
+    word-break: break-all;
+    word-wrap: break-word;
+    line-height: 25px;
+}
+
+/*右侧搜索和推荐样式*/
+.side {
+    margin-top: 20px;
+    border: solid 1px #cccccc;
+    padding: 0px 0px;
+    background-color: whitesmoke;
+}
+
+.side .tip {
+    background-color: #333333;
+    height: 42px;
+    color: white;
+    line-height: 42px;
+    padding-left: 10px;
+    border-radius: 0px;
+    font-size: 18px;
+    border-bottom: solid 2px orangered;
+}
+
+.side ul {
+    list-style: none;
+    padding-left: 5px;
+}
+
+.side ul li {
+    line-height: 35px;
+    padding-left: 10px;
+}
+
+/*文章搜索栏*/
+.search-bar {
+    margin: 0px;
+    border: solid 1px #cccccc;
+    padding: 10px 0px;
+    background-color: #563d7c;
+}
+
+/*文章详细样式*/
+.article-detail {
+    border: solid 1px #cccccc;
+    margin: 0px;
+    background-color: whitesmoke;
+    padding: 0px 10px 0px 20px;
+}
+
+.article-detail .title {
+    font-size: 24px;
+    color: #e56244;
+    margin-top: 30px;
+}
+
+.article-detail .favorite {
+    margin: 30px 0px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.article-detail .readall {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.article-detail .readall button {
+    height: 45px;
+    background-color: #337AB7;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.article-detail .favorite label {
+    font-weight: normal;
+    color: #337AB7;
+    cursor: pointer;
+}
+
+.article-detail .info {
+    font-size: 14px;
+    color: #666666;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #cccccc;
+    margin-bottom: 20px;
+}
+
+.article-detail .content {
+    font-size: 16px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.article-detail .content img {
+    border: solid 1px #999999;
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.article-nav {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 10px 10px 10px 20px;
+    line-height: 35px;
+}
+
+.article-comment {
+    border: solid 1px #cccccc;
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    padding: 20px 0px 10px 0px;
+    line-height: 35px;
+}
+
+.article-comment .list {
+    margin: 0px 0px 10px 0px;
+    border-top: solid 1px #cccccc;
+    padding-top: 10px;
+}
+
+.article-comment .list .icon {
+    margin: 0px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.article-comment .list .icon img {
+    margin-right: 30px;
+}
+
+.article-comment .list .comment {
+    padding: 0px 0px;
+}
+
+.article-comment .list .comment .commenter {
+    font-size: 14px;
+    color: #666666;
+}
+
+.article-comment .list .comment .content {
+    font-size: 16px;
+    padding-left: 0px;
+}
+
+.article-comment .list .comment .reply {
+    text-align: right;
+}
+
+.article-comment .list .comment .reply label {
+    font-weight: normal;
+    color: #337AB7;
+    cursor: pointer;
+}
+
+/*底部内容样式*/
+.footer {
+    background-color: #333333;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    color: white;
+}
+
+.footer .left {
+    font-size: 16px;
+    margin: 20px 0px;
+}
+
+.footer .center {
+    font-size: 16px;
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.footer .right {
+    font-size: 16px;
+    margin: 20px 0px;
+    text-align: right;
+}

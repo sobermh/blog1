@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BootStrap栅格系统</title>
+    <!-- 直接从Bootstrap网站导入css文件，或者将bootstrap下载到本地-->
+    <link rel="stylesheet" href="/static/bootstrap-4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap-4.6.1/js/bootstrap.js"></script>
+    <!--  要想配置的响应式布局在移动端生效，就要配置此语句，user-scaleable=yes/no 是否允许用户缩放  -->
+    <meta name="viewport" content="width=devices-width, initial-scale=1"/>
+    <style>
+        .row div {
+            border: solid 2px red;
+        }
+
+        /*<!-- 因为栅格系统的默认宽度是1140 -->*/
+        /*判断，当屏幕宽度大于1300px时，栅格系统的container属性宽度是1300*/
+        @media (min-width: 1300px) {
+            .container {
+                max-width: 1300px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!--栅格系统，会将网页分成12份（宽度），设置最外层div的宽度为1200px，每一份就是100px-->
+<!--三层：模拟<table><tr><td>,第一层，必须是container属性，第二层，必须指定row属性-->
+<!--   所有的div，如果不指定高度，默认是0，但是会根据div中的内容进行自动调整-->
+<div class="container">
+    <div class="row">
+        <!--col-xl-3: 表示在超大屏幕（大于1200像素）的浏览器窗口上显示为3列宽-->
+        <!--col-lg-3: 表示在大型屏幕（大于992像素）的浏览器窗口上显示为3列宽-->
+        <!--col-md-6: 表示在中等屏幕（大于768像素）的浏览器窗口上显示为6列宽-->
+        <!--col-sm-6: 表示在小型屏幕（大于576像素）的浏览器窗口上显示为6列宽-->
+        <!--col-12: 表示在超小屏幕（大于1200像素）的浏览器窗口上显示为12列宽,手机端适配此设计-->
+        <!--一般都只用sm表示pc，最小表示移动-->
+        <!-- 向上默认的-->
+        <div class="col-sm-9 col-12">1</div>
+        <div class="col-sm-3 col-12">1</div>
+    </div>
+</div>
+
+<!--选项卡-->
+<!--选项卡-->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#admin" role="tab" aria-controls="home"
+           aria-selected="true">
+            <h6>系统管理</h6>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="profile"
+           aria-selected="false">
+            <h6>新闻编辑</h6>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab1" data-toggle="tab" href="#audit" role="tab" aria-controls="contact"
+           aria-selected="false">
+            <h6>新闻审核</h6>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab2" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+           aria-selected="false">
+            <h6>联系反馈</h6>
+        </a>
+    </li>
+</ul>
+<div class="tab-content border border-top-0" id="myTabContent">
+    <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="home-tab">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">系统管理内容</li>
+        </ul>
+    </div>
+    <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="profile-tab">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">新闻编辑内容</li>
+            <li class="list-group-item">新闻编辑内容</li>
+            <li class="list-group-item">新闻编辑内容</li>
+            <li class="list-group-item">新闻编辑内容</li>
+        </ul>
+    </div>
+    <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="contact-tab">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">新闻审核内容</li>
+        </ul>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">问题反馈内容</li>
+        </ul>
+    </div>
+</div>
+
+<!--模态框-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    Launch static backdrop modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">登录窗口</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input class="form-control" type="text"/>
+                <input class="form-control" type="text"/>
+                <input class="btn btn-secondary" type="button" value="登录"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="alert()">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

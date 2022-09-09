@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content%}
+<head>
+    <meta charset="UTF-8">
+    <title>发布页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-4.6.1/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap-4.6.1/js/bootstrap.js"></script>
+
+</head>
+
+
+<div class="container" style="border: none;padding: 15px 0;">
+    <div class="row">
+        <div class="col-12">文章标题
+            <!--            <label for="articletitle">：</label>-->
+            <input type="text" class="form-control" id="articletitle">
+        </div>
+        <div class="col-12" style="padding-top: 3px">
+            <script id="content" type="text/plain"></script>
+        </div>
+    </div>
+</div>
+<!-- 加载编辑器的容器 -->
+<script id="container" name="content" type="text/plain"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/static/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('content', {
+        // autoHeightEnabled: true,
+        // autoFloatEnabled: true,
+        initialFrameHeight  :640,
+        serverUrl: '/post/uedit',
+    });
+</script>
+{% endblock %}
