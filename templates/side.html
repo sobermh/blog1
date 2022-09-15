@@ -14,7 +14,7 @@
         <div class="tip">最新文章</div>
         <ul id="last_article">
             <li v-for="(article,index) in content">
-                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,4)}}...</a>
+                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,15)}}...</a>
             </li>
         </ul>
     </div>
@@ -22,7 +22,7 @@
         <div class="tip">最多阅读</div>
         <ul id="most_article">
             <li v-for="(article,index) in content">
-                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,4)}}...</a>
+                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,15)}}...</a>
             </li>
         </ul>
     </div>
@@ -30,7 +30,7 @@
         <div class="tip">特别推荐</div>
         <ul id="recommended_article">
             <li v-for="(article,index) in content">
-                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,4)}}...</a>
+                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,15)}}...</a>
             </li>
         </ul>
         <div class="col-12 side" style="background-color: #3276b1; text-align: center; cursor: pointer;"
@@ -143,7 +143,7 @@
 
     //回到顶部的功能
     function gotoTop() {
-        $('html,body').animate({scrollTop: 0}, 800);
+        $('html,body').animate({scrollTop: 0}, 500);
         return false;
     }
 

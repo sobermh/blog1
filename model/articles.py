@@ -23,12 +23,14 @@
   　　　　　　　   ┃┫┫     ┃┫┫
   　　　　　　　   ┗┻┛     ┗┻┛+ + + +
 """
+import time
 
+from flask import session
 from sqlalchemy import Table, MetaData, func
 
 from app import db
 
-from module.users import Users
+from model.users import Users
 
 
 # from .users import Users
@@ -53,7 +55,7 @@ class Articles(db.Model):
     def find_limit_with_users(self, start, count):
         result = db.session.query(Articles, Users).join(Users, Users.userid == Articles.userid) \
             .filter(Articles.drafted == 0) \
-            .order_by(Articles.articleid.asc()).limit(count).offset(start).all()
+            .order_by(Articles.articleid.desc()).limit(count).offset(start).all()
         return result
 
     # 统计当前文章的总数量,
@@ -66,7 +68,7 @@ class Articles(db.Model):
     def find_by_type(self, start, count, type):
         result = db.session.query(Articles, Users).join(Users, Users.userid == Articles.userid) \
             .filter(Articles.drafted == 0, Articles.type == type) \
-            .order_by(Articles.articleid.asc()).limit(count).offset(start).all()
+            .order_by(Articles.articleid.desc()).limit(count).offset(start).all()
         return result
 
     # 根据文章类型来获取总数量
@@ -78,7 +80,7 @@ class Articles(db.Model):
     def find_by_headline(self, start, count, headline):
         result = db.session.query(Articles, Users).join(Users, Users.userid == Articles.userid) \
             .filter(Articles.drafted == 0, Articles.headline.like('%' + headline + '%')) \
-            .order_by(Articles.articleid.asc()).limit(count).offset(start).all()
+            .order_by(Articles.articleid.desc()).limit(count).offset(start).all()
         return result
 
     # 根据搜索结果统计分页总数量
@@ -165,6 +167,19 @@ class Articles(db.Model):
         db.session.commit()
 
 
+    # 插入一篇新的文章，草稿或投稿通过参数进行区分
+    def insert_article(self,type,headline,content,credit,drafted=0):
+        now = time.strftime('%Y-%m-%d %H:%M:%S')
+        userid = session.get('userid')
+        # 其他字段的数据库中均已设置好默认值，无须手工插入
+        article = Articles(userid=userid,type=type,headline=headline,content=content
+                           ,credit=credit,drafted=drafted,createtime=now,updatetime=now)
+        db.session.add(article)
+        db.session.commit()
+        return article.articleid     #讲新的文章编号返回，便于前端页面跳
+
+
+
+
 # if __name__=='__main__':
-#
-#     Articles().find_headline_by_id(1)
+#     Articles().insert_article(type=1,headline=2,content=2,credit=2)

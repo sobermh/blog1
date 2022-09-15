@@ -26,11 +26,12 @@
 import hashlib
 import re
 
-from flask import Blueprint, make_response, session, request, redirect, url_for
+from flask import Blueprint, make_response, session, request, redirect, url_for, jsonify
 from common.utility import ImageCode, EmailCode
+from common.redisdb import RedisDB
 
-from module.users import Users  # （放在函数中，是为了解决循环引入的问题）
-from module.credit import Credit  # （放在函数中，是为了解决循环引入的问题）
+from model.users import Users  # （放在函数中，是为了解决循环引入的问题）
+from model.credit import Credit  # （放在函数中，是为了解决循环引入的问题）
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -52,8 +53,8 @@ def register():
         return 'user-repeated'
     # 实现注册
     else:
-        password = hashlib.md5(password.encode()).hexdigest()
-        result = Users().do_register(username, password)
+        password_md5 = hashlib.md5(password.encode()).hexdigest()
+        result = Users().do_register(username, password_md5)
         session['islogin'] = 'true'
         session['userid'] = result.userid
         session['username'] = username
@@ -113,8 +114,7 @@ def ecode():
     # 对邮箱进行正则校验xx@xx.xx
     if not re.match('.+@.+\..+', email):
         return 'email-invalid'
-
-    code = EmailCode()  .gen_email_code()
+    code = EmailCode().gen_email_code()
     # 全部转化为小写，写入session
     session['ecode'] = code
     try:
@@ -133,5 +133,54 @@ def logout():
     resopnse.headers['location'] = url_for('/.index_home')  # 重定向打开首页
     resopnse.delete_cookie('username')
     resopnse.set_cookie('password', '', max_age=0)  # 这一句和删除cookie性质一样
-
     return resopnse
+
+
+# 用户注册时生成邮箱验证码并保存到缓存中
+@bp.route("/redis/code", methods=['POST'])
+def redis_code():
+    username = request.form.get('username').strip()
+    code = EmailCode().gen_email_code()
+    red = RedisDB().redis_connect()  # 连接到Redis服务器
+    red.set(username, code)
+    red.expire(username, 30)  # 设置username变量的有效期为30秒
+    # 设置好缓存变量的过期时间后，发生邮件完成处理，此代码略
+    return 'done'
+
+
+# 根据用户的注册邮箱去缓存中查找验证码进行验证
+@bp.route("/redis/reg", methods=['POST'])
+def redis_reg():
+    username = request.form.get('username').strip()
+    password = request.form.get('password').strip()
+    ecode = request.form.get('ecode').lower().strip()
+    try:
+        red = RedisDB().redis_connect()  # 连接到redis服务器
+        code = red.get(username).lower()
+        if code == ecode:
+            return "验证码正确"
+            # 开始注册，此代码省略
+        else:
+            return '验证码错误'
+    except:
+        return "验证码已经失效了"
+
+
+# 使用redis进行登录验证
+@bp.route('/redis/login', methods=['POST'])
+def redis_login():
+    red = RedisDB().redis_connect()
+    # 通过取值判断用户名的key是否存在
+    username = request.form.get('username').strip()
+    password = request.form.get('password').strip()
+    password_md5 = hashlib.md5(password.encode()).hexdigest()
+    try:
+        result = red.hget('user_hash',username)
+        # user = eval(result)
+        # print(user)
+        if password_md5 == result:
+            return "登录成功"
+        else:
+            return "密码错误"
+    except:
+        return "用户名不存在"

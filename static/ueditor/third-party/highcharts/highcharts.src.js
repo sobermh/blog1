@@ -12152,7 +12152,7 @@ Chart.prototype = {
 	}
 }; // end Chart
 
-// Hook for exporting module
+// Hook for exporting model
 Chart.prototype.callbacks = [];
 /**
  * The Point object and prototype. Inheritable and used as base for PiePoint

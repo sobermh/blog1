@@ -25,7 +25,9 @@
 """
 import random
 import string
+from datetime import datetime
 from io import BytesIO
+
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -131,6 +133,9 @@ class Model_to_list():
             dict = {}
             for k, v in row.__dict__.items():
                 if not k.startswith('_sa_instance_state'):
+                    # 如果某个字段的值时datetime类型，则将其格式为字符串
+                    if isinstance(v,datetime):
+                        v= v.strftime('%y-%m-%d %H:%M:%S')
                     dict[k] = v
             list.append(dict)
         return list
@@ -152,8 +157,5 @@ class Model_to_list():
             list.append(dict)
         return list
 
-# if __name__ == '__main__':
-# #     ImageCode().draw_captcha()
-#     code= gen_email_code()
-#     print(code)
-#     send_email('409788696@qq.com',code)
+
+

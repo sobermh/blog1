@@ -27,7 +27,7 @@ def server_error(e):
 # 定义全局拦截器，实现自动登录
 @app.before_request
 def auto_login():
-    from module.users import Users  # 解决循环导入问题
+    from model.users import Users  # 解决循环导入问题
     # 添加拦截白名单，这些不需要执行自动登录
     url = request.path
     pass_list = ['/user','/login','/logout']
@@ -53,7 +53,8 @@ def gettype():
     type = {
         '1': 'python',
         '2': '测试',
-        '3': '后端'
+        '3': '后端',
+        '4' : 'vlog'
     }
     return dict(article_type=type)
 

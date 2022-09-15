@@ -32,7 +32,7 @@ from sqlalchemy import Table, MetaData
 
 from common.utility import Model_to_list
 
-from module.users import Users
+from model.users import Users
 
 
 class Comment(db.Model):

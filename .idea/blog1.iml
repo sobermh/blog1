@@ -13,6 +13,9 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="vue" level="application" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="renderExternalDocumentation" value="true" />
+  </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
       <list>

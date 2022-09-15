@@ -58,3 +58,6 @@ class Users(db.Model):
         user = db.session.query(Users).filter_by(userid=session.get('userid')).one()
         user.credit = int(user.credit)+credit
         db.session.commit()
+
+# if __name__ == "__main__":
+#     Users().do_register('4097886964@qq.com','123456')

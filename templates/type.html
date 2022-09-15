@@ -64,11 +64,11 @@
                 {% endif%}
 
                 {% for i in range(total)%}
-                <a href="/type/{{type}}-{{page+1}}">{{i+1}}</a>
+                <a href="/type/{{type}}-{{i+1}}">{{i+1}}</a>
                 {% endfor%}
 
                 <!--是否有下一页-->
-                {% if page == total %}
+                {% if page == total or total==0 %}
                 {% else%}
                 <a href="/type/{{type}}-{{page+1}}">下一页</a>
                 {% endif%}

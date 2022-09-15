@@ -67,7 +67,7 @@
                 {% endfor%}
 
                 <!--是否有下一页-->
-                {% if page == total %}
+                {% if page == total or total==0 %}
                 {% else%}
                 <a href="/search/{{page+1}}-{{keyword}}">下一页</a>
                 {% endif%}

@@ -26,11 +26,11 @@
 
 from flask import Blueprint, abort, render_template, request, session
 
-from module.articles import Articles
-from module.credit import Credit
-from module.users import Users
-from module.favorite import Favorite
-from module.comment import Comment
+from model.articles import Articles
+from model.credit import Credit
+from model.users import Users
+from model.favorite import Favorite
+from model.comment import Comment
 
 bp = Blueprint("article", __name__, url_prefix="/article")
 
@@ -40,7 +40,7 @@ bp = Blueprint("article", __name__, url_prefix="/article")
 def before_comment():
     # 添加拦截黑名单，这些不需要执行自动登录
     url = request.path
-    pass_list = ['/article/comment','/article/reply']
+    pass_list = ['/article/comment', '/article/reply', '/article/post']
     if url in pass_list and (session.get('islogin') is None or session.get('islogin') != 'true'):
         return "not-login"
 
@@ -82,7 +82,7 @@ def read(articleid):
     prev_next = Articles().find_prev_next_by_id(articleid)
     # 显示当前文章对于的评论
     # comment_user = Comment().find_limit_with_user(articleid, 0, 50)
-    comment_list = Comment().get_comment_user_list(articleid,0,50)
+    comment_list = Comment().get_comment_user_list(articleid, 0, 50)
     return render_template('article.html', article=dict, position=position, payed=payed, is_favorited=is_favorited,
                            prev_next=prev_next, comment_list=comment_list)
 
@@ -177,7 +177,30 @@ def reply():
     else:
         return 'reply-limit'
 
-# 上传文章
-@bp.route('/post')
+
+# 打开上传文章页面,新增文章
+@bp.route('/post', methods=['GET', 'POST'])
 def post():
-    return render_template('post.html')
+    if request.method == 'GET':
+        return render_template('post.html')
+    else:
+        headline = request.form.get('headline')
+        content = request.form.get('content')
+        type = int(request.form.get('type'))
+        credit = int(request.form.get('credit'))
+        drafted = int(request.form.get('drafted'))
+        if session.get('userid') is None:
+            return 'perm-denied'
+        else:
+            try:
+                print(1)
+                id = Articles().insert_article(type=type, headline=headline, content=content
+                                               , credit=credit)
+                print(id)
+                return str(id)
+            except Exception as e:
+                return 'post-fail'
+
+# # 新增文章
+# @bp.route('',methods=['POST'])
+# def add_article('')

@@ -42,11 +42,11 @@ def uedit():
     elif request.method == 'POST' and request.args.get('action') == 'uploadimage':
         f = request.files['upfile']  # 获取前端图片文件数据
         filename = f.filename
-        f.save( sys.path[0]+'/static/upload' +filename)  # 保存图片到upload目录
-        # f.save('./static/upload/' + filename)
+        f.save( sys.path[0]+'/static/upload/' +filename)  # 保存图片到upload目录
+        # f.save('./static/upload/' + filename)  # 保存图片到upload目录
         result = {}  # 构造响应数据
         result['state'] = 'SUCCESS'
-        result['url'] = f"/upload/{filename}"
+        result['url'] = f"/static/upload/{filename}"
         result['title'] = filename
         result['original'] = filename
 
