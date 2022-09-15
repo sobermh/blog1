@@ -95,4 +95,4 @@ if __name__ == '__main__':
     app.register_blueprint(user_bp)  # 注册蓝图
     app.register_blueprint(article_bp)
     app.register_blueprint(post_bp)
-    app.run(debug=True, host='0.0.0.0', port=5002)
+    app.run(debug=True, host='0.0.0.0', port=3355)

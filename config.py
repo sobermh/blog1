@@ -25,11 +25,11 @@
 """
 
 #数据库的配置信息
-HOSTNAME = '127.0.0.1'
+HOSTNAME = '47.97.118.247'
 PORT = '3306'
 DATABASE = 'blog'   #数据库名称
 USERNAME = 'root'
-PASSWORD = 'root'
+PASSWORD = '123456'
 
 
 
