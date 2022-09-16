@@ -38,6 +38,8 @@ DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'\
 
 SQLALCHEMY_DATABASE_URI = DB_URI      #sqlalchemy专用
 SQLALCHEMY_TRACK_MODIFICATIONS = False  #跟踪数据库的修改，及时发送信号
+SQLALCHEMY_MAX_OVERFLOW = 30
+# SQLALCHEMY_POOL_TIMEOUT = 300
 
 # #缓解问题：QueuePool limit of size 10 overflow 10 reached, connection timed out, timeout 30.00
 # pool_size = 100

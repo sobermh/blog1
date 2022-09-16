@@ -41,6 +41,7 @@ class Credit(db.Model):
                         credit=credit,createtime=now,updatetime=now)
         db.session.add(credit)
         db.session.commit()
+        db.session.close()
 
     # 判断用户是否已经消耗积分
     def check_payed_article(self,articleid):

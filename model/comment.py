@@ -45,6 +45,7 @@ class Comment(db.Model):
                           , ipaddr=ipaddr, createtime=now, updatetime=now)
         db.session.add(comment)
         db.session.commit()
+        db.session.close()
 
     # 根据文章编号查询所有评论
     def find_by_articleid(self, articleid):
@@ -77,6 +78,7 @@ class Comment(db.Model):
                           createtime=now, updatetime=now)
         db.session.add(comment)
         db.session.commit()
+        db.session.close()
 
     # 查询原始评论与对应的用户信息，带分页参数
     def find_comment_with_user(self,articleid,start,count):

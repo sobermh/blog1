@@ -181,6 +181,7 @@ def reply():
 # 打开上传文章页面,新增文章
 @bp.route('/post', methods=['GET', 'POST'])
 def post():
+    import markdown
     if request.method == 'GET':
         return render_template('post.html')
     else:
@@ -194,7 +195,7 @@ def post():
         else:
             try:
                 print(1)
-                id = Articles().insert_article(type=type, headline=headline, content=content
+                id = Articles().insert_article(type=type, headline=headline, content=markdown.markdown(content)
                                                , credit=credit)
                 print(id)
                 return str(id)

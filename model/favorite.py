@@ -42,12 +42,14 @@ class Favorite(db.Model):
             favorite = Favorite(articleid=articleid,userid=session.get('userid'),canceled=0,createtime=now,updatetime=now)
             db.session.add(favorite)
         db.session.commit()
+        db.session.close()
 
     # 取消收藏
     def cancel_favorite(self,articleid):
         row = db.session.query(Favorite).filter_by(articleid=articleid,userid=session.get('userid')).first()
         row.canceled=1
         db.session.commit()
+        db.session.close()
 
     #判断是否已经被收藏
     def check_favorite(self,articleid):

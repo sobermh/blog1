@@ -1,6 +1,7 @@
 from flask import Flask, session, request
 # from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+
 import config  # 导入配置文件
 
 # app = Flask(__name__,template_folder="",static_url_path="",static_folder="")
@@ -87,6 +88,7 @@ app.jinja_env.filters.update(truncate=mytruncate)
 
 
 
+
 if __name__ == '__main__':
 
     # 将注册蓝图放在这里，解决循环导入问题（或者将蓝图中导入数据库模块的操作放在函数中）
@@ -95,4 +97,4 @@ if __name__ == '__main__':
     app.register_blueprint(user_bp)  # 注册蓝图
     app.register_blueprint(article_bp)
     app.register_blueprint(post_bp)
-    app.run(debug=True, host='0.0.0.0', port=3355)
+    app.run(debug=True, host='0.0.0.0', port=3355,threaded=True)

@@ -51,3 +51,7 @@ def uedit():
         result['original'] = filename
 
         return jsonify(result)  # 以json数据格式返回响应，供前端编辑器引用
+
+@bp.route('/editormd')
+def editormd():
+    return render_template("post_md.html")

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content%}
+<head>
+    <meta charset="UTF-8">
+    <title>发布页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap-4.6.1/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/bootstrap-4.6.1/js/bootstrap.js"></script>
+    <!-- editormd CSS文件 -->
+    <link rel="stylesheet" href="/static/editormd/css/editormd.css"/>
+    <!-- editormd JS相关文件 -->
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/editormd/editormd.min.js"></script>
+
+</head>
+
+<div class="container" style="border: none;padding: 15px 0;">
+    <div class="row form-group" style="padding: 0 15px;">
+        <!--            <label for="articletitle">：</label>-->
+        <label for="headline">文章标题</label>
+        <input type="text" class="form-control" id="headline">
+    </div>
+
+
+    <!-- 加载编辑器的容器 -->
+    <!-- 文章的主体内容 textarea -->
+    <div id="article-content" class="row form-group">
+        <textarea name="content" id="content" style="display:none;"> </textarea>
+    </div>
+
+    <!--选择区域-->
+    <div class="row form-group" style="margin-top: 20px;padding-top: 10px;">
+        <label for="type" class="col-1">类型：</label>
+        <select class="form-control col-2" id="type">
+            {% for k,v in article_type.items() %}
+            <option value={{k}}>{{v}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="credit" class="col-1">积分</label>
+        <select class="form-control col-2" id="credit">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="100">100</option>
+        </select>
+
+        <label class="col-1"></label>
+        <!--        <button class="form-control btn-dark col-2" onclick="doDraft()">保存草稿</button>-->
+        <button class="form-control btn-primary col-2" onclick="doPost()">发布文章</button>
+    </div>
+
+</div>
+
+
+<!--发布文章-->
+<script>
+    function doPost() {
+        var headline = $.trim($("#headline").val());
+        var content = $.trim($("#content").val());
+        if (headline.length < 5) {
+            alert("标题不能少于5个字");
+            return false;
+        } else if (content.length < 10) {
+            alert("内容不能少于10个字");
+            return false;
+        }
+        var param = "headline=" + headline;
+        param += "&content=" + content;
+        param += "&type=" + $("#type").val();
+        param += "&credit=" + $("#credit").val();
+        param += "&drafted=0";
+        $.post('/article/post', param, function (data) {
+            if (data == 'perm-denid') {
+                alert("请先登录");
+            } else if (data == 'post-fail') {
+                alert("提交失败,请联系张万森");
+            } else if (data.match(/^\d+$/)) {
+                alert("you did it");
+                setTimeout(function () {
+                    location.href = '/article/' + data;
+                }, 1000);
+            } else {
+                alert("联系张万森");
+            }
+        });
+    }
+</script>
+
+
+<!--实例化markdown编辑器-->
+<script type="text/javascript">
+    var testEditor;
+    $(function () {
+        testEditor = editormd("article-content", {
+            // width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "/static/editormd/lib/",
+            imageUpload: true,//是否开启图片上传功能
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],//允许上传的图片格式
+            imageUploadURL: "/upload",//图片上传调用的后端功能
+        });
+    });
+</script>
+
+
+{% endblock %}

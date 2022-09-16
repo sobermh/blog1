@@ -51,6 +51,7 @@ class Users(db.Model):
                      nickname=nickname,headportrait=headportrait+'.jpg',createtime=now)
         db.session.add(user)
         db.session.commit()
+        db.session.close()
         return user
 
     #修改用户剩余积分，积分为正数表示增加积分，为负数表示减少积分
@@ -58,6 +59,7 @@ class Users(db.Model):
         user = db.session.query(Users).filter_by(userid=session.get('userid')).one()
         user.credit = int(user.credit)+credit
         db.session.commit()
+        db.session.close()
 
 # if __name__ == "__main__":
 #     Users().do_register('4097886964@qq.com','123456')

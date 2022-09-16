@@ -65,7 +65,7 @@ class ImageCode:
         # 创建图片对象，并设定背景为白色
         im = Image.new('RGB', (width, height), 'white')
         # 选择使用何种字体和字体大小
-        font = ImageFont.truetype(font='arial.ttf', size=40)
+        font = ImageFont.truetype(font='DejaVuSans.ttf', size=40)
         # 新建imagedraw对象
         draw = ImageDraw.Draw(im)
         # 绘制字符串

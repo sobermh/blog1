@@ -8,21 +8,21 @@
     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
     <script src="/static/js/jquery-3.6.0.min.js"></script>
     <script src="/static/bootstrap-4.6.1/js/bootstrap.js"></script>
-
 </head>
 
 
 <div class="container" style="border: none;padding: 15px 0;">
     <div class="row form-group">
-            <!--            <label for="articletitle">：</label>-->
-            <label for="headline">文章标题</label>
-            <input type="text" class="form-control" id="headline">
-        </div>
-        <div class="row" style="padding-top: 3px">
-            <!-- 加载编辑器的容器 -->
-<!--            <script id="container" name="content" type="text/plain"></script>-->
-            <script id="content" type="text/plain"></script>
-        </div>
+        <!--            <label for="articletitle">：</label>-->
+        <label for="headline">文章标题</label>
+        <input type="text" class="form-control" id="headline">
+    </div>
+
+    <div class="row" style="padding-top: 3px">
+        <!-- 加载编辑器的容器 -->
+        <!--            <script id="container" name="content" type="text/plain"></script>-->
+        <script id="content" type="text/plain"></script>
+    </div>
     <!--选择区域-->
     <div class="row form-group" style="margin-top: 20px;padding-top: 10px;">
         <label for="type" class="col-1">类型：</label>
@@ -44,13 +44,12 @@
             <option value="100">100</option>
         </select>
 
-        <label  class="col-1"></label>
-<!--        <button class="form-control btn-dark col-2" onclick="doDraft()">保存草稿</button>-->
+        <label class="col-1"></label>
+        <!--        <button class="form-control btn-dark col-2" onclick="doDraft()">保存草稿</button>-->
         <button class="form-control btn-primary col-2" onclick="doPost()">发布文章</button>
     </div>
 
 </div>
-
 
 <!-- 配置文件 -->
 <script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
@@ -61,43 +60,39 @@
     var ue = UE.getEditor('content', {
         // autoHeightEnabled: true,
         // autoFloatEnabled: true,
-        initialFrameHeight  :640,
+        initialFrameHeight: 640,
         serverUrl: '/post/uedit',
     });
 </script>
 
 <!--发布文章-->
 <script>
-    function doPost(){
+    function doPost() {
         var headline = $.trim($("#headline").val());
         var content = UE.getEditor("content").getContentTxt();
-        if(headline.length < 5){
+        if (headline.length < 5) {
             alert("标题不能少于5个字");
             return false;
-        }
-        else if (content.length <10){
+        } else if (content.length < 10) {
             alert("内容不能少于10个字");
             return false;
         }
-        var param = "headline="+headline;
-        param += "&content="+encodeURIComponent(UE.getEditor("content").getContent());
+        var param = "headline=" + headline;
+        param += "&content=" + encodeURIComponent(UE.getEditor("content").getContent());
         param += "&type=" + $("#type").val();
         param += "&credit=" + $("#credit").val();
         param += "&drafted=0";
-        $.post('/article/post',param,function (data){
-            if (data == 'perm-denid'){
+        $.post('/article/post', param, function (data) {
+            if (data == 'perm-denid') {
                 alert("请先登录");
-            }
-            else if (data == 'post-fail'){
+            } else if (data == 'post-fail') {
                 alert("提交失败,请联系张万森");
-            }
-            else if (data.match(/^\d+$/)){
+            } else if (data.match(/^\d+$/)) {
                 alert("you did it");
-                setTimeout(function (){
-                    location.href = '/article/' +data;
-                },1000);
-            }
-            else{
+                setTimeout(function () {
+                    location.href = '/article/' + data;
+                }, 1000);
+            } else {
                 alert("联系张万森");
             }
         });
