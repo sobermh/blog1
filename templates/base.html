@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="/">首页</a>
-<!--                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
+                    <!--                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>-->
                     {% for k,v in article_type.items() %}
                     <a class="nav-link" href="/type/{{k}}-1">{{v}}</a>
                     {% endfor %}
@@ -55,7 +55,7 @@
                     <a class="nav-link" href="#">用户中心</a>
                     <a class="nav-link" href="/article/post">发表文章</a>
                     {% else %}
-                    <a class="nav-link " href="#"  onclick="showLogin()">登录 </a>
+                    <a class="nav-link " href="#" onclick="showLogin()">登录 </a>
                     <a class="nav-link" href="#" onclick="showReg()">注册</a>
                     {% endif %}
                 </div>
@@ -116,13 +116,14 @@
                            style="color: midnightblue">注册</a>
                     </li>
                     <li id="find" class="nav-item">
-                        <a href="#findpanel" data-toggle="tab" class="nav-link " style="color: midnightblue">找回密码</a>
+                        <a href="#findpanel" data-toggle="tab" class="nav-link "
+                           style="color: midnightblue">找回密码</a>
                     </li>
                 </ul>
             </div>
 
             <div class="tab-content">
-                 <!-- 绘制登录窗口 -->
+                <!-- 绘制登录窗口 -->
                 <div class="tab-pane container" id="loginpanel">
                     <div class="modal-content" style="margin: 20px 0px;">
                         <div class="modal-body">

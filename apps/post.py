@@ -42,7 +42,7 @@ def uedit():
     elif request.method == 'POST' and request.args.get('action') == 'uploadimage':
         f = request.files['upfile']  # 获取前端图片文件数据
         filename = f.filename
-        f.save( sys.path[0]+'/static/upload/' +filename)  # 保存图片到upload目录
+        f.save(sys.path[0] + '/static/upload/' + filename)  # 保存图片到upload目录
         # f.save('./static/upload/' + filename)  # 保存图片到upload目录
         result = {}  # 构造响应数据
         result['state'] = 'SUCCESS'
@@ -51,6 +51,7 @@ def uedit():
         result['original'] = filename
 
         return jsonify(result)  # 以json数据格式返回响应，供前端编辑器引用
+
 
 @bp.route('/editormd')
 def editormd():
