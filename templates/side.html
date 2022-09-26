@@ -1,5 +1,5 @@
 <!-- 右侧搜索和推荐-->
-<script src="/static/js/vue.min.js"></script>
+<script src="/static/js/vue.js"></script>
 <div class="col-sm-3 col-12" style="border: none;padding-right: 0;padding-top: 15px">
     <div class="col-12 search-bar row" style="">
         <div class="col-8">
@@ -14,7 +14,7 @@
         <div class="tip">最新文章</div>
         <ul id="last_article">
             <li v-for="(article,index) in content">
-                <a v-bind:href="'/article/'+article[0]">${index+1}}.&nbsp;&nbsp;${article[1].substr(0,15)}}...</a>
+                <a v-bind:href="'/article/'+article[0]"> ${index+1}}.&nbsp;&nbsp;${article[1].substr(0,15)}}...</a>
             </li>
         </ul>
     </div>

@@ -10,7 +10,6 @@ import config  # 导入配置文件
 
 app = Flask(__name__)
 app.config.from_object(config)  # 绑定config文件中的配置
-
 db=SQLAlchemy(app) # 实例化数据库对象
 
 

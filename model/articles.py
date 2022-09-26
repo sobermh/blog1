@@ -192,7 +192,7 @@ class Articles(db.Model):
                            ,credit=credit,drafted=drafted,createtime=now,updatetime=now)
         db.session.add(article)
         db.session.commit()
-        db.session.close()
+        # db.session.close()
         return article.articleid     #讲新的文章编号返回，便于前端页面跳
 
 
